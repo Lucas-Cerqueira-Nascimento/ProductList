@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "types": ["cypress"]
+  },
+  "include": ["**/*.js", "cypress/**/*.js", "src/index.jsx"]
+}
