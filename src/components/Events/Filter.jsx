@@ -18,6 +18,7 @@ export default function Filter({ setPrice, setNome }) {
           setNomeChecked(val);
           setNome(val);
         }}
+        id="NomeCheckBox"
       />
       <label>Preço</label>
       <input
@@ -28,6 +29,7 @@ export default function Filter({ setPrice, setNome }) {
           setPriceChecked(val);
           setPrice(val); // Atualiza o pai apenas no clique
         }}
+        id="PriceCheckBox"
       />
     </div>
   );

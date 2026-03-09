@@ -18,6 +18,7 @@ export default function SearchProduct({ setBusca, priceChecked, nomeChecked }) {
           placeholder="Nome do Produto"
           style={{ textAlign: "center" }}
           onChange={(e) => setSearchLocal(e.target.value)}
+          id="NameSearch"
         />
       )}
 
@@ -27,6 +28,7 @@ export default function SearchProduct({ setBusca, priceChecked, nomeChecked }) {
           placeholder="Preço do Produto"
           style={{ textAlign: "center" }}
           onChange={(e) => setSearchLocal(e.target.value)}
+          id="PriceSearch"
         />
       )}
       <button>Buscar</button>

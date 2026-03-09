@@ -7,7 +7,11 @@ export default function MenuEvent({ newProduct, setPrice, setNome }) {
   const [openTabAddProduct, setOpenTabAddProduct] = useState(false);
   return (
     <div>
-      <button onClick={() => setOpenTabFilter((prev) => !prev)} title="filter">
+      <button
+        onClick={() => setOpenTabFilter((prev) => !prev)}
+        title="filter"
+        id="Filter"
+      >
         <ListFilter />
       </button>
       <div className="FilterContent">
