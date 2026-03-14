@@ -7,8 +7,8 @@ export default function ProductList({ produtos }) {
         <ul key={id} className="product-grid product-row">
           <li>{nome}</li>
           <li>{price}</li>
-          <li>{dataVal}</li>
           <li>{dataFab}</li>
+          <li>{dataVal}</li>
         </ul>
       )}
     </div>

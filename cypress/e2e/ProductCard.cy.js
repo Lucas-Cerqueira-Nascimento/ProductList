@@ -75,10 +75,8 @@ describe("Adicinando um produto", () => {
 
     btnFilter.click(); // fecha o filter
 
-    // cy.get("#PriceSearch").should("exist").clear().type("4{enter}");
+    cy.get("#PriceSearch").should("exist").clear().type("4{enter}");
 
-    // expect(cy.contains("li", "4,00").should("exist"));
+    expect(cy.contains("li", "4,00").should("exist"));
   });
 });
-
-// ARRUMA ESSA MERDA PORQUE N SEI O Q ACONTECEU  NESSA MERDAAAA
