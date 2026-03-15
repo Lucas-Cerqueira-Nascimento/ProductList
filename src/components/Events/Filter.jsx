@@ -2,8 +2,8 @@ import { useState } from "react";
 
 // Filter.jsx
 export default function Filter({ setPrice, setNome }) {
-  const [nomeChecked, setNomeChecked] = useState(true);
-  const [priceChecked, setPriceChecked] = useState(false);
+  const [nomeChecked, setNomeChecked] = useState(null);
+  const [priceChecked, setPriceChecked] = useState(null);
 
   // Criar o sistema de pesquisa por preço!
 

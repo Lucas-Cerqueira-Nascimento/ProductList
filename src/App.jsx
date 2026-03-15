@@ -3,27 +3,31 @@ import SearchProduct from "./components/searchForm";
 import ProductList from "./components/productTable";
 import MenuEvent from "./components/menuEvent";
 import { v4 as uuidv4 } from "uuid";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export default function App() {
-  //banco de Dados (entre aspas)
-  const [produtos, setProdutos] = useState([
-    {
-      id: 1,
-      nome: "leite",
-      price: "4,00",
-      dataFab: "18/02/2026",
-      dataVal: "25/02/2026",
-      isConferied: false,
-    },
-    {
-      id: 2,
-      nome: "arroz",
-      price: "10,00",
-      dataFab: "10/03/2026",
-      dataVal: "25/04/2026",
-      isConferied: false,
-    },
-  ]);
+  //Zustand
+  const useProductStore = create(
+    persist((set) => ({
+      produtos: [],
+
+      addProduct: (newProd) => {
+        set((state) => ({ produtos: [...state.produtos, newProd] }));
+      },
+
+      updatePrice: (nome, novoPreco, dataFab, dataVal) =>
+        set((state) => ({
+          produtos: state.produtos.map((p) =>
+            p.nome === nome
+              ? { ...p, price: novoPreco, dataFab: dataFab, dataVal: dataVal }
+              : p,
+          ),
+        })),
+    })),
+  );
+
+  const { produtos, addProduct, updatePrice } = useProductStore();
 
   // Adiciona um novo Produto
   const newProduct = (nome, price, dataFab, dataVal) => {
@@ -38,34 +42,20 @@ export default function App() {
     );
 
     if (produtoExistente) {
-      // 3. Se o nome existe e o preço é diferente, atualizamos apenas esse produto
-      if (produtoExistente.price !== price) {
-        const listaAtualizada = produtos.map((item) => {
-          // Comparamos pelo NOME, pois o ID do 'newProd' é novo e não existe na lista ainda
-          if (item.nome.toLowerCase() === nome.toLowerCase()) {
-            return { ...item, price: price, dataFab: dFabBR, dataVal: dValBR };
-          }
-          return item;
-        });
+      return updatePrice(nome, price, dFabBR, dValBR);
+    } else {
+      // Se o nome NÃO existe na lista, criamos um do zero
+      const newProd = {
+        id: uuidv4(),
+        nome,
+        price,
+        dataFab: dFabBR,
+        dataVal: dValBR,
+        isConferied: false,
+      };
 
-        return setProdutos(listaAtualizada);
-      }
-
-      // Se o nome e o preço forem iguais, não fazemos nada (evita duplicados idênticos)
-      return;
+      return addProduct(newProd);
     }
-
-    // 4. Se o nome NÃO existe na lista, criamos um do zero
-    const newProd = {
-      id: uuidv4(),
-      nome,
-      price,
-      dataFab: dFabBR,
-      dataVal: dValBR,
-      isConferied: false,
-    };
-
-    setProdutos([...produtos, newProd]);
   };
 
   // Filtro de pesquisa
